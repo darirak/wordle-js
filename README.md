@@ -12,4 +12,6 @@ Features:
 
 ![WordlePreviewV1](https://github.com/darirak/wordle-js/blob/Version-1/assets/wordlepreviewv1.png?raw=true)
 
-Replica of [original Wordle Game](https://www.nytimes.com/games/wordle/index.html). Made with JavaScript.
+
+<p align="right">Replica of <a href="https://www.nytimes.com/games/wordle/index.html">original Wordle Game</a>
+<br /> Made with JavaScript</p>
