@@ -1,7 +1,7 @@
 <h1 align="center">Wordle</h1>
 
 
-### V 2.0 - On-Screen Mobile Keyboard
+### <a href="https://github.com/darirak/wordle-js/tree/Version-2">v2.0</a> - On-Screen Mobile Keyboard
 
 Features:
 - Functional On-Screen Keyboard
@@ -11,9 +11,7 @@ Features:
 ![WordlePreviewV2](https://github.com/darirak/wordle-js/blob/Version-2/assets/wordlepreviewv2.png?raw=true)
 
 ### Patch Notes:
-V 1.0 - Game Implementation (without on-screen mobile keyboard)
-
-Features:
+<a href="https://github.com/darirak/wordle-js/tree/Version-1">v1.0</a> - Game Implementation (without on-screen mobile keyboard)
 - Functional Game
 - Alerts for Invalid Word/Win/Lose
 - CSS & Animation: Normal-Wrong-Right letter display, Letter flipping
