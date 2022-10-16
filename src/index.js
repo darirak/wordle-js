@@ -2,6 +2,37 @@ import { testDictionary, realDictionary } from "./dictionary.js";
 
 console.log("test dictionary:", testDictionary);
 
+const keys = [
+  "Q",
+  "W",
+  "E",
+  "R",
+  "T",
+  "Y",
+  "U",
+  "I",
+  "O",
+  "P",
+  "A",
+  "S",
+  "D",
+  "F",
+  "G",
+  "H",
+  "J",
+  "K",
+  "L",
+  "ENTER",
+  "Z",
+  "X",
+  "C",
+  "V",
+  "B",
+  "N",
+  "M",
+  "BKSP",
+];
+
 const dictionary = realDictionary;
 const state = {
   secret: dictionary[Math.floor(Math.random() * dictionary.length)],
@@ -10,6 +41,41 @@ const state = {
     .map(() => Array(5).fill("")),
   currentRow: 0,
   currentCol: 0,
+};
+
+const keyboard = document.querySelector(".key-container");
+
+keys.forEach((key) => {
+  const buttonElement = document.createElement("button");
+  buttonElement.textContent = key;
+  buttonElement.setAttribute("id", key);
+  buttonElement.addEventListener("click", () => handleClick(key));
+  keyboard.append(buttonElement);
+});
+
+/*Conversie din Upper in Lower, dictionary problem*/
+const handleClick = (letter) => {
+  var letter = letter.toLowerCase();
+  if (letter === "enter") {
+    if (state.currentCol === 5) {
+      const word = getCurrentWord();
+      console.log(word);
+      if (isWordValid(word)) {
+        revealWord(word);
+        state.currentRow++;
+        state.currentCol = 0;
+      } else {
+        alert("Not a valid word.");
+      }
+    }
+  }
+  if (letter === "bksp") {
+    removeLetter();
+  }
+  if (isLetter(letter)) {
+    addLetter(letter);
+  }
+  updateGrid();
 };
 
 function drawGrid(container) {
@@ -44,10 +110,11 @@ function drawBox(container, row, col, letter = "") {
   return box;
 }
 
+/*Conversie din Upper in Lower, dictionary problem*/
 function registerKeyboardEvents() {
   document.body.onkeydown = (e) => {
-    const key = e.key;
-    if (key === "Enter") {
+    const key = e.key.toLowerCase();
+    if (key === "enter") {
       if (state.currentCol === 5) {
         const word = getCurrentWord();
         if (isWordValid(word)) {
@@ -59,7 +126,7 @@ function registerKeyboardEvents() {
         }
       }
     }
-    if (key === "Backspace") {
+    if (key === "backspace") {
       removeLetter();
     }
     if (isLetter(key)) {
@@ -164,7 +231,6 @@ function removeLetter() {
 function startup() {
   const game = document.getElementById("game");
   drawGrid(game);
-
   registerKeyboardEvents();
 }
 
