@@ -234,6 +234,8 @@ function revealWord(guess) {
 
   setTimeout(() => {
     if (isWinner) {
+      //TODO Register Timer once you win for leaderboard
+      clearInterval(timer);
       alert("Congratulations! 🎉");
     } else if (isGameOver) {
       alert(`Better luck next time! The word was    ${state.secret}   💥`);

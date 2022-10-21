@@ -9,7 +9,9 @@ Features:
 - CSS: Login Page CSS, New Icons added for Wordle Page
 - Buttons for Log-Out, Timer, Rules, Restart Game and Leaderboard (work in progress)
 - File Structure Changes (Wordle Game moved to new files)
-- Folder Structure (TBA)
+- Login Account:
+  - Email = `aaaaaa@yahoo.com`
+  - Password = `aaaaaa`
 
 ![WordlePreviewV3](https://github.com/darirak/wordle-js/blob/Version-3/assets/wordlepreviewv3.png?raw=true)
 
