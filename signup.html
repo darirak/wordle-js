@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="./src/signup.css" />
+  </head>
+  <body>
+    <main>
+      <section class="container signup-container">
+        <fieldset>
+          <div>
+            <img src="./assets/icons/signup.svg" />
+          </div>
+          <div>
+            <label for="mail"></label> <br />
+            <input type="email" id="mail" name="mail" placeholder="Email" />
+          </div>
+          <div>
+            <label for="password"></label> <br />
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Password"
+            />
+            <br />
+          </div>
+          <button id="signUp">SIGN UP</button>
+          <button id="backToLogin">Back to Login</button>
+        </fieldset>
+      </section>
+    </main>
+    <script type="module" src="firebase.js"></script>
+    <script type="module" src="./src/signup.js"></script>
+  </body>
+</html>

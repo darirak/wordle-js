@@ -4,8 +4,6 @@ import {
   GoogleAuthProvider,
   signInWithEmailAndPassword,
   onAuthStateChanged,
-  setPersistence,
-  browserSessionPersistence,
 } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-auth.js";
 import app from "../firebase.js";
 
@@ -13,27 +11,11 @@ const mailField = document.getElementById("mail");
 const passwordField = document.getElementById("password");
 const signInWithMail = document.getElementById("signInWithMail");
 const signInWithGoogleButton = document.getElementById("signInWithGoogle");
+const signUp = document.getElementById("signUp");
 
 //For Firebase (Note: gstatic link)
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
-
-//Auth State Check Persistence
-// setPersistence(auth, browserSessionPersistence)
-//   .then(() => {
-//     // Existing and future Auth states are now persisted in the current
-//     // session only. Closing the window would clear any existing state even
-//     // if a user forgets to sign out.
-//     // ...
-//     // New sign-in will be persisted with session persistence.
-//     return signInWithEmailAndPassword(auth, email, password);
-//   })
-//   .catch((e) => {
-//     // Handle Errors here.
-//     // const eCode = e.code;
-//     // const eMessage = e.message;
-//     console.log(e);
-//   });
 
 //Auth State Changed
 onAuthStateChanged(auth, (user) => {
@@ -102,7 +84,7 @@ const signInWithEmailFunction = () => {
 
 signInWithMail.addEventListener("click", signInWithEmailFunction);
 
-// SIGN-UP PAGE
-// signUp.addEventListener("click", () => {
-//   window.location.assign("./signup");
-// });
+//SIGN-UP PAGE
+signUp.addEventListener("click", () => {
+  window.location.assign("./signup.html");
+});

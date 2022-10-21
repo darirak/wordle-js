@@ -1,0 +1,53 @@
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+} from "https://www.gstatic.com/firebasejs/9.12.1/firebase-auth.js";
+import app from "../firebase.js";
+
+const mailField = document.getElementById("mail");
+const passwordField = document.getElementById("password");
+const signUp = document.getElementById("signUp");
+const backToLogin = document.getElementById("backToLogin");
+
+const auth = getAuth(app);
+
+const signUpFunction = () => {
+  const email = mailField.value;
+  const password = passwordField.value;
+
+  createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      alert("Account Successfully Created !");
+      console.log("Signed Up Successfully !");
+      window.location.assign("./");
+      const user = userCredential.user;
+      console.log(user);
+    })
+    .catch((e) => {
+      //Error codes from Firebase Documentation
+      if (e.code === "auth/email-already-in-use") {
+        alert("email already in use!");
+      } else if (e.code === "auth/invalid-email") {
+        alert("invalid E-mail format!");
+      } else if (e.code === "auth/invalid-password") {
+        alert("invalid password format!");
+      } else if (e.code === "auth/user-not-found") {
+        alert("user not found!");
+      } else if (e.code === "auth/wrong-password") {
+        alert("wrong password!");
+      } else if (e.code === "auth/unauthorized-continue-uri") {
+        alert("whitelist the domain in firebase!");
+      } else if (e.code === "auth/internal-error") {
+        alert("double-check creditentials!");
+      } else if (e.code === "auth/network-request-failed") {
+        alert("without network connection!");
+      }
+      console.log(e);
+    });
+};
+
+signUp.addEventListener("click", signUpFunction);
+
+backToLogin.addEventListener("click", () => {
+  window.location.assign("./");
+});

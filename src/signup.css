@@ -6,7 +6,6 @@
 
 main {
   width: 100vw;
-  height: 800px;
 }
 
 .container,
@@ -20,18 +19,13 @@ main {
 .container {
   position: absolute;
   left: 50%;
-  top: 80%;
-  transform: translate(-50%, -80%);
-}
-
-.wrapper {
-  position: relative;
-  height: 80%;
+  top: 50%;
+  transform: translate(-50%, -60%);
 }
 
 fieldset {
   border: rgb(192, 192, 192, 0.1) 1px solid;
-  height: 500px;
+  height: 460px;
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.12);
 }
 
@@ -54,6 +48,20 @@ button {
   margin: 20px 42px 0px 0px;
   padding: 10px 20px;
   border: 1px solid #2196f3;
+}
+
+button {
+  background-color: white;
+  color: #2196f3;
+}
+
+button:first-of-type {
+  float: right;
+  background-color: #2196f3;
+  color: white;
+}
+
+button:hover {
   background-color: #2196f3;
   color: white;
   cursor: pointer;
@@ -63,30 +71,19 @@ button {
   margin-right: 5px;
 }
 
-.google {
-  background-color: #ffffff !important;
-  border: 1px solid #d1d1d1 !important;
-  color: #757575 !important;
-  display: grid;
-  margin: 25px 0px 0px 0px !important;
-}
-
 .container div {
-  margin: 20px 40px;
+  margin: 10px 40px;
   position: relative;
 }
 
-.mail-container img {
+img {
+  width: 100px;
+  height: 100px;
   margin: auto;
   display: block;
 }
 
-.mail-container div:first-of-type {
+.signup-container div:first-of-type {
   width: 340px;
-  margin: 40px 40px;
-}
-
-#signInWithGoogle {
-  align-items: center;
-  display: flex;
+  margin-top: 50px;
 }

@@ -4,17 +4,15 @@
 ### <a href="https://github.com/darirak/wordle-js/tree/Version-3">v3.0</a> - Firebase Authentication 
 
 Features:
+- [3.1] SignUp Page - Email-Password
 - Login Page - Email-Password & Google Sign-In
 - Firebase Auth - User is logged on session, gets kicked if the timer expires
 - CSS: Login Page CSS, New Icons added for Wordle Page
 - Buttons for Log-Out, Timer, Rules, Restart Game and Leaderboard (work in progress)
 - File Structure Changes (Wordle Game moved to new files)
-<<<<<<< HEAD
 - Login Account:
   - Email = `aaaaaa@yahoo.com`
   - Password = `aaaaaa`
-=======
->>>>>>> 082e8c0186ca28ba54626143adc564008150c54d
 
 ![WordlePreviewV3](https://github.com/darirak/wordle-js/blob/Version-3/assets/wordlepreviewv3.png?raw=true)
 
