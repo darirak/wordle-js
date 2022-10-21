@@ -1,4 +1,10 @@
 import { testDictionary, realDictionary } from "./dictionary.js";
+import {
+  getAuth,
+  signOut,
+  onAuthStateChanged,
+} from "https://www.gstatic.com/firebasejs/9.12.1/firebase-auth.js";
+import app from "../firebase.js";
 
 console.log("test dictionary:", testDictionary);
 
@@ -33,7 +39,9 @@ const keys = [
   "BKSP",
 ];
 
+const auth = getAuth(app);
 const dictionary = realDictionary;
+let secret;
 const state = {
   secret: dictionary[Math.floor(Math.random() * dictionary.length)],
   grid: Array(6)
@@ -42,6 +50,19 @@ const state = {
   currentRow: 0,
   currentCol: 0,
 };
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    // User is signed in, see docs for a list of available properties
+    // https://firebase.google.com/docs/reference/js/firebase.User
+    console.log(user);
+    console.log("The current logged user is " + user.displayName);
+    // ...
+  } else {
+    // User is signed out
+    window.location.assign("./");
+  }
+});
 
 const keyboard = document.querySelector(".key-container");
 
@@ -65,7 +86,7 @@ const handleClick = (letter) => {
         state.currentRow++;
         state.currentCol = 0;
       } else {
-        alert("Not a valid word.");
+        alert("Not a valid word. ⛔");
       }
     }
   }
@@ -122,7 +143,7 @@ function registerKeyboardEvents() {
           state.currentRow++;
           state.currentCol = 0;
         } else {
-          alert("Not a valid word.");
+          alert("Not a valid word. ⛔");
         }
       }
     }
@@ -165,6 +186,12 @@ function getPositionOfOccurrence(word, letter, position) {
   return result;
 }
 
+//BUG
+// const addColorToKey = (keyLetter, color) => {
+//   const key = document.getElementById(keyLetter);
+//   key.classList.add(color);
+// };
+
 function revealWord(guess) {
   const row = state.currentRow;
   const animation_duration = 500; // ms
@@ -188,6 +215,8 @@ function revealWord(guess) {
       } else {
         if (letter === state.secret[i]) {
           box.classList.add("right");
+          //BUG
+          // addColorToKey(letter, "green-overlay");
         } else if (state.secret.includes(letter)) {
           box.classList.add("wrong");
         } else {
@@ -205,9 +234,9 @@ function revealWord(guess) {
 
   setTimeout(() => {
     if (isWinner) {
-      alert("Congratulations!");
+      alert("Congratulations! 🎉");
     } else if (isGameOver) {
-      alert(`Better luck next time! The word was ${state.secret}.`);
+      alert(`Better luck next time! The word was    ${state.secret}   💥`);
     }
   }, 3 * animation_duration);
 }
@@ -232,6 +261,85 @@ function startup() {
   const game = document.getElementById("game");
   drawGrid(game);
   registerKeyboardEvents();
+  if (timer) clearInterval(timer);
+  timer = startLogoutTimer();
 }
+
+//Timer Test
+let timer;
+const labelTimer = document.querySelector(".timer");
+const startLogoutTimer = function () {
+  const tick = function () {
+    const min = String(Math.trunc(time / 60)).padStart(2, 0);
+    const sec = String(time % 60).padStart(2, 0);
+
+    //Print remaining time to UI
+    labelTimer.textContent = `${min}:${sec}`;
+
+    //When 0 seconds, stop timer and log out user
+    if (time === 0) {
+      clearInterval(timer);
+      signOutAcc();
+    }
+
+    //Decrease 1s
+    time--;
+  };
+
+  // Set time to X mins
+  let time = 120;
+
+  // Call the timer every second
+  tick();
+  const timer = setInterval(tick, 1000);
+
+  return timer;
+};
+
+const signOutAcc = () => {
+  signOut(auth)
+    .then(() => {
+      // Sign-out successful.
+      window.location.assign("./");
+    })
+    .catch((e) => {
+      // An error happened.
+      console.log(e);
+    });
+};
+
+//LOGOUT BUTTON + MESSAGE
+document.querySelector("#test").onclick = function () {
+  if (window.confirm("Do you really want to logout?")) {
+    signOutAcc();
+  }
+};
+
+//RULES
+document.querySelector("#rules").onclick = function () {
+  alert(`
+  Guess the word in 6 attempts 💯
+
+  Correct letters go Green 🟩✔, Incorrect letters go Gray ⬛✖
+  
+  Correct letters placed in wrong spots would turn Yellow 🟨🤸‍♂️
+
+  Letters can be used more than once. Good luck! ✌`);
+};
+
+// BUG : Again Button
+document.getElementById("again").onclick = function () {
+  //Clear Timer
+  if (timer) clearInterval(timer);
+  timer = startLogoutTimer();
+  //Reset Grid
+  //Reset KeyBoard Color
+
+  //Get New Word TODO replace current word with new word
+  secret = dictionary[Math.floor(Math.random() * dictionary.length)];
+  console.log(secret);
+  /* document.querySelector(state).value = ""; */
+  //Clear any on-screen effects (grid related, win / lose)
+};
 
 startup();
