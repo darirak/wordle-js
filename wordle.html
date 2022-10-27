@@ -9,7 +9,7 @@
       name="description"
       content="Wordle JS by Alexandru Angelescu aka darirak"
     />
-    <link rel="stylesheet" href="./src/style.css" />
+    <link rel="stylesheet" href="./src/wordle.css" />
   </head>
   <body>
     <header class="header">
@@ -19,7 +19,7 @@
         </button>
         <!-- LOGOUT TIMER -->
         <p class="logout-timer">
-          <span class="timer">02:00</span>
+          <span class="timer">90</span>
         </p>
         <!-- LOGOUT TIMER -->
         <button class="icon">
@@ -28,13 +28,13 @@
       </div>
       <h1 class="title">Wordle</h1>
       <div class="menuright">
-        <button class="icon" id="again">
+        <button class="icon" id="refresh" onClick="window.location.reload();">
           <img src="./assets/icons/refresh.svg" alt="Restart" />
         </button>
         <button class="icon" id="rules">
           <img src="./assets/icons/rules.svg" alt="Rules" />
         </button>
-        <button class="icon">
+        <button class="icon" id="leaderboard">
           <img src="./assets/icons/leaderboard.svg" alt="Settings" />
         </button>
       </div>
@@ -43,6 +43,28 @@
     <div class="game-container">
       <div id="game"></div>
       <div class="key-container"></div>
+    </div>
+    <div id="stats-modal" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close" id="close-stats">&times;</span>
+        <!-- ceva -->
+        <button type="button" id="getData">Retrieve Ranks</button>
+        <div class="modal-header">
+          <h2 class="modal-title" style="text-align: center">Leaderboard</h2>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Name</th>
+              <th>Time Left</th>
+              <th>Attempts</th>
+            </tr>
+          </thead>
+          <tbody id="tablebody" class="tablebody"></tbody>
+        </table>
+      </div>
     </div>
     <script defer src="./src/wordle.js" type="module"></script>
   </body>

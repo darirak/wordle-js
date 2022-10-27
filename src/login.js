@@ -5,7 +5,7 @@ import {
   signInWithEmailAndPassword,
   onAuthStateChanged,
 } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-auth.js";
-import app from "../firebase.js";
+import { app } from "../firebase.js";
 
 const mailField = document.getElementById("mail");
 const passwordField = document.getElementById("password");

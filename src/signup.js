@@ -1,9 +1,11 @@
 import {
   getAuth,
   createUserWithEmailAndPassword,
+  updateProfile,
 } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-auth.js";
-import app from "../firebase.js";
+import { app } from "../firebase.js";
 
+const nameField = document.getElementById("name");
 const mailField = document.getElementById("mail");
 const passwordField = document.getElementById("password");
 const signUp = document.getElementById("signUp");
@@ -12,16 +14,22 @@ const backToLogin = document.getElementById("backToLogin");
 const auth = getAuth(app);
 
 const signUpFunction = () => {
+  const name = nameField.value;
   const email = mailField.value;
   const password = passwordField.value;
 
   createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      alert("Account Successfully Created !");
-      console.log("Signed Up Successfully !");
-      window.location.assign("./");
-      const user = userCredential.user;
-      console.log(user);
+    .then(() => {
+      updateProfile(auth.currentUser, {
+        displayName: name,
+      })
+        .then(() => {
+          alert("Account Successfully Created !");
+          window.location.assign("./");
+        })
+        .catch((e) => {
+          console.log(e);
+        });
     })
     .catch((e) => {
       //Error codes from Firebase Documentation
