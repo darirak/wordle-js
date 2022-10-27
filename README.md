@@ -14,11 +14,14 @@ Features:
   - Email = `aaaaaa@yahoo.com`
   - Password = `aaaaaa`
 
+<div align="center">
+
 ![WordleDatabase](https://github.com/darirak/wordle-js/blob/Version-4/assets/wordleDatabase.png?raw=true)
 
 ![WordleIndex](https://github.com/darirak/wordle-js/blob/Version-4/assets/wordleIndex.png?raw=true)
 
 ![WordlePreviewV4](https://github.com/darirak/wordle-js/blob/Version-4/assets/wordlepreviewv4.png?raw=true)
+</div>
 
 ### Patch Notes:
 <a href="https://github.com/darirak/wordle-js/tree/Version-3">v3.1</a> - Firebase Authentication
