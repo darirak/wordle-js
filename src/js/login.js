@@ -1,3 +1,4 @@
+import { app } from "./firebase.js";
 import {
   getAuth,
   signInWithPopup,
@@ -5,7 +6,6 @@ import {
   signInWithEmailAndPassword,
   onAuthStateChanged,
 } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-auth.js";
-import { app } from "../firebase.js";
 
 const mailField = document.getElementById("mail");
 const passwordField = document.getElementById("password");
@@ -18,15 +18,12 @@ const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
 //Auth State Changed
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(auth, function (user) {
   if (user) {
-    // User is signed in, see docs for a list of available properties
-    // https://firebase.google.com/docs/reference/js/firebase.User
     const uid = user.uid;
     console.log(uid);
     console.log(user);
     window.location.assign("./wordle.html");
-    // ...
   } else {
     // User is signed out
     console.log("User Logged Out - Please sign in to continue");
@@ -34,32 +31,32 @@ onAuthStateChanged(auth, (user) => {
 });
 
 //GOOGLE SIGN-IN
-const signInWithGoogle = () => {
+function signInWithGoogle() {
   signInWithPopup(auth, provider)
-    .then((result) => {
+    .then(function (result) {
       const credential = GoogleAuthProvider.credentialFromResult(result);
       const token = credential.accessToken;
       const user = result.user;
       window.location.assign("./wordle.html");
     })
-    .catch((e) => {
+    .catch(function (e) {
       console.error(e);
     });
-};
+}
 
 signInWithGoogleButton.addEventListener("click", signInWithGoogle);
 
 //EMAIL SIGN-IN
-const signInWithEmailFunction = () => {
+function signInWithEmailFunction() {
   const email = mailField.value;
   const password = passwordField.value;
 
   signInWithEmailAndPassword(auth, email, password)
-    .then(() => {
+    .then(function () {
       //Signed in successfully
       window.location.assign("./wordle.html");
     })
-    .catch((e) => {
+    .catch(function (e) {
       //Error codes from Firebase Documentation
       if (e.code === "auth/email-already-in-use") {
         alert("email already in use!");
@@ -80,11 +77,11 @@ const signInWithEmailFunction = () => {
       }
       console.log(e);
     });
-};
+}
 
 signInWithMail.addEventListener("click", signInWithEmailFunction);
 
 //SIGN-UP PAGE
-signUp.addEventListener("click", () => {
+signUp.addEventListener("click", function () {
   window.location.assign("./signup.html");
 });

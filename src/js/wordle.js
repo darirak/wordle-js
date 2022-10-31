@@ -1,12 +1,12 @@
 import { testDictionary, realDictionary } from "./dictionary.js";
+import { app, database } from "./firebase.js";
+import { keys } from "./keys.js";
 import {
   getAuth,
   signOut,
   onAuthStateChanged,
 } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-auth.js";
-import { app, database } from "../firebase.js";
 import {
-  addDoc,
   setDoc,
   getDoc,
   getDocs,
@@ -18,42 +18,9 @@ import {
   limit,
 } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-firestore.js";
 
-// console.log("test dictionary:", testDictionary);
-
-const keys = [
-  "Q",
-  "W",
-  "E",
-  "R",
-  "T",
-  "Y",
-  "U",
-  "I",
-  "O",
-  "P",
-  "A",
-  "S",
-  "D",
-  "F",
-  "G",
-  "H",
-  "J",
-  "K",
-  "L",
-  "ENTER",
-  "Z",
-  "X",
-  "C",
-  "V",
-  "B",
-  "N",
-  "M",
-  "BKSP",
-];
-
 const auth = getAuth(app);
 const dictionary = realDictionary;
-let secret;
+const keyboard = document.querySelector(".key-container");
 const state = {
   secret: dictionary[Math.floor(Math.random() * dictionary.length)],
   grid: Array(6)
@@ -62,14 +29,10 @@ const state = {
   currentRow: 0,
   currentCol: 0,
 };
-
-//TODO Remove later
 console.log("Current word is : " + state.secret);
 
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(auth, function (user) {
   if (user) {
-    // User is signed in, see docs for a list of available properties
-    // https://firebase.google.com/docs/reference/js/firebase.User
     console.log(user);
     console.log("The current logged user is " + user.displayName);
   } else {
@@ -78,18 +41,16 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 
-const keyboard = document.querySelector(".key-container");
-
-keys.forEach((key) => {
+keys.forEach(function (key) {
   const buttonElement = document.createElement("button");
   buttonElement.textContent = key;
+  var key = key.toLowerCase();
   buttonElement.setAttribute("id", key);
   buttonElement.addEventListener("click", () => handleClick(key));
   keyboard.append(buttonElement);
 });
 
-/*Conversie din Upper in Lower, dictionary problem*/
-const handleClick = (letter) => {
+function handleClick(letter) {
   var letter = letter.toLowerCase();
   if (letter === "enter") {
     if (state.currentCol === 5) {
@@ -111,45 +72,10 @@ const handleClick = (letter) => {
     addLetter(letter);
   }
   updateGrid();
-};
-
-function drawGrid(container) {
-  const grid = document.createElement("div");
-  grid.className = "grid";
-
-  for (let i = 0; i < 6; i++) {
-    for (let j = 0; j < 5; j++) {
-      let square = document.createElement("div");
-      square.setAttribute("id", i + 1);
-      drawBox(grid, i, j);
-    }
-  }
-
-  container.appendChild(grid);
 }
 
-function updateGrid() {
-  for (let i = 0; i < state.grid.length; i++) {
-    for (let j = 0; j < state.grid[i].length; j++) {
-      const box = document.getElementById(`box${i}${j}`);
-      box.textContent = state.grid[i][j];
-    }
-  }
-}
-
-function drawBox(container, row, col, letter = "") {
-  const box = document.createElement("div");
-  box.className = "box";
-  box.textContent = letter;
-  box.id = `box${row}${col}`;
-
-  container.appendChild(box);
-  return box;
-}
-
-/*Conversie din Upper in Lower, dictionary problem*/
 function registerKeyboardEvents() {
-  document.body.onkeydown = (e) => {
+  document.body.onkeydown = function (e) {
     const key = e.key.toLowerCase();
     if (key === "enter") {
       if (state.currentCol === 5) {
@@ -169,9 +95,39 @@ function registerKeyboardEvents() {
     if (isLetter(key)) {
       addLetter(key);
     }
-
     updateGrid();
   };
+}
+
+function drawGrid(container) {
+  const grid = document.createElement("div");
+  grid.className = "grid";
+  for (let i = 0; i < 6; i++) {
+    for (let j = 0; j < 5; j++) {
+      let square = document.createElement("div");
+      square.setAttribute("id", i + 1);
+      drawBox(grid, i, j);
+    }
+  }
+  container.appendChild(grid);
+}
+
+function updateGrid() {
+  for (let i = 0; i < state.grid.length; i++) {
+    for (let j = 0; j < state.grid[i].length; j++) {
+      const box = document.getElementById(`box${i}${j}`);
+      box.textContent = state.grid[i][j];
+    }
+  }
+}
+
+function drawBox(container, row, col, letter = "") {
+  const box = document.createElement("div");
+  box.className = "box";
+  box.textContent = letter;
+  box.id = `box${row}${col}`;
+  container.appendChild(box);
+  return box;
 }
 
 function getCurrentWord() {
@@ -202,12 +158,6 @@ function getPositionOfOccurrence(word, letter, position) {
   return result;
 }
 
-//BUG
-// const addColorToKey = (keyLetter, color) => {
-//   const key = document.getElementById(keyLetter);
-//   key.classList.add(color);
-// };
-
 function revealWord(guess) {
   const row = state.currentRow;
   const animation_duration = 500; // ms
@@ -222,21 +172,24 @@ function revealWord(guess) {
     const numOfOccurrencesGuess = getNumOfOccurrencesInWord(guess, letter);
     const letterPosition = getPositionOfOccurrence(guess, letter, i);
 
-    setTimeout(() => {
+    setTimeout(function () {
+      const keys = document.getElementById(letter);
       if (
         numOfOccurrencesGuess > numOfOccurrencesSecret &&
         letterPosition > numOfOccurrencesSecret
       ) {
         box.classList.add("empty");
+        keys.classList.add("empty");
       } else {
         if (letter === state.secret[i]) {
           box.classList.add("right");
-          //BUG
-          // addColorToKey(letter, "green-overlay");
+          keys.classList.add("right");
         } else if (state.secret.includes(letter)) {
           box.classList.add("wrong");
+          keys.classList.add("wrong");
         } else {
           box.classList.add("empty");
+          keys.classList.add("empty");
         }
       }
     }, ((i + 1) * animation_duration) / 2);
@@ -251,22 +204,35 @@ function revealWord(guess) {
   //Firestore Data x Console Logs
   async function readDoc() {
     const name = auth.currentUser.displayName;
-    console.log("Current display Name: " + auth.currentUser.displayName);
     const newattempts = state.currentRow;
-    console.log("Current number of attempts: " + state.currentRow);
     const currentUser = doc(database, "users", name);
     clearInterval(timer);
     const timeleft = document.querySelector(".timer").innerHTML;
-    console.log("Current timeleft: " + timeleft);
+    console.log(
+      "\n Current Player \n \n" +
+        "Display Name: " +
+        auth.currentUser.displayName +
+        "\n" +
+        "Remaining Time: " +
+        timeleft +
+        "\n" +
+        "Number of Attempts: " +
+        state.currentRow
+    );
     const mySnapshot = await getDoc(currentUser);
     if (mySnapshot.exists()) {
-      // Display data from Firestore Database
+      // Display Data from Firestore Database
       const docData = mySnapshot.data();
-      console.log(`My data is ${JSON.stringify(docData)}`);
       const time = mySnapshot.data().time;
-      console.log("This is database timeleft: " + time);
       const attempts = mySnapshot.data().attempts;
-      console.log("This is database attempts: " + attempts);
+      console.log(
+        "\n Personal Database Record \n \n" +
+          "Timeleft: " +
+          time +
+          "\n" +
+          "Attempts: " +
+          attempts
+      );
       var tc = timeleft > time;
       var ac = newattempts < attempts;
       if (tc || ac) {
@@ -308,13 +274,25 @@ function revealWord(guess) {
     }
   }
 
-  setTimeout(() => {
+  setTimeout(function () {
     if (isWinner) {
+      stopKeyboard();
       readDoc();
     } else if (isGameOver) {
+      stopKeyboard();
       alert(`Better luck next time! The word was    ${state.secret}   💥`);
     }
   }, 3 * animation_duration);
+}
+
+function stopKeyboard() {
+  //Keyboard
+  document.body.onkeydown = null;
+  //On-Screen Keyboard
+  let keyboards = document.querySelector(".key-container");
+  let clone = keyboards.cloneNode(true);
+  keyboards.parentNode.insertBefore(clone, keyboards);
+  keyboards.parentNode.removeChild(keyboards);
 }
 
 function isLetter(key) {
@@ -333,20 +311,11 @@ function removeLetter() {
   state.currentCol--;
 }
 
-function startup() {
-  const game = document.getElementById("game");
-  drawGrid(game);
-  registerKeyboardEvents();
-  initStatsModal();
-  if (timer) clearInterval(timer);
-  timer = startLogoutTimer();
-}
-
-//Timer Test
+//TIMER
 let timer;
 const labelTimer = document.querySelector(".timer");
-const startLogoutTimer = function () {
-  const tick = function () {
+function startLogoutTimer() {
+  function tick() {
     labelTimer.textContent = `${time}`;
 
     //When 0 seconds, stop timer and log out user
@@ -356,32 +325,29 @@ const startLogoutTimer = function () {
     }
     //Decrease 1s
     time--;
-  };
-
-  // Set time to X mins
+  }
+  // Set time to X seconds
   let time = 90;
-
   // Call the timer every second
   tick();
   const timer = setInterval(tick, 1000);
-
   return timer;
-};
+}
 
-const signOutAcc = () => {
+function signOutAcc() {
   signOut(auth)
-    .then(() => {
+    .then(function () {
       // Sign-out successful.
       window.location.assign("./");
     })
-    .catch((e) => {
+    .catch(function (e) {
       // An error happened.
       console.log(e);
     });
-};
+}
 
 //LOGOUT BUTTON + MESSAGE
-document.querySelector("#test").onclick = function () {
+document.querySelector("#logout").onclick = function () {
   if (window.confirm("Do you really want to logout?")) {
     signOutAcc();
   }
@@ -408,8 +374,14 @@ function initStatsModal() {
   const span = document.getElementById("close-stats");
   // When the user clicks on the button, open the modal
   btn.addEventListener("click", function () {
-    updateStatsModal();
     modal.style.display = "block";
+    leaderboard();
+    leaderboard = function () {
+      let ldb = document.getElementById("tablebody");
+      let cloned = ldb.cloneNode(true);
+      ldb.parentNode.insertBefore(cloned, ldb);
+      ldb.parentNode.removeChild(ldb);
+    };
   });
   // When the user clicks on <span> (x), close the modal
   span.addEventListener("click", function () {
@@ -423,14 +395,8 @@ function initStatsModal() {
   });
 }
 
-function updateStatsModal() {
-  document.querySelector("#getData").onclick = function () {
-    getDatainTable();
-  };
-}
-
 //LEADERBOARD
-async function getDatainTable() {
+var leaderboard = async function getDatainTable() {
   const q = query(
     collection(database, "users"),
     orderBy("attempts"),
@@ -438,16 +404,16 @@ async function getDatainTable() {
     limit(10)
   );
   const querySnapshot = await getDocs(q);
+  // forEach doesn't return index | querySnapshot.forEach(function(doc) { })
   for (var i in querySnapshot.docs) {
     const doc = querySnapshot.docs[i];
-    // forEach doesn't return index
-    // querySnapshot.forEach((doc) => { })
-    console.log(doc.id, " => ", doc.data());
+    let index = i;
+    index++;
     const player =
       `
   <tr>
-  <td>` +
-      `${i}` +
+  <td id="index">` +
+      `${index}` +
       `</td>
     <td>` +
       `${doc.id}` +
@@ -465,82 +431,15 @@ async function getDatainTable() {
       .insertAdjacentHTML("beforeend", player);
     // document.getElementById("tablebody").innerHTML = player;
   }
+};
+
+function startup() {
+  const game = document.getElementById("game");
+  drawGrid(game);
+  registerKeyboardEvents();
+  initStatsModal();
+  if (timer) clearInterval(timer);
+  timer = startLogoutTimer();
 }
-
-//TODOFIX Cleanup Crew Raise Up
-// return (
-//   `
-// <tr>
-//   <td>` +
-//   `${doc.data().displayname}` +
-//   `</td>
-//   <td>` +
-//   `${doc.data().time}` +
-//   `</td>
-//   <td>` +
-//   `${doc.data().attempts}` +
-//   `</td>
-// </tr>
-// `
-// );
-
-// let tablebody = document.getElementById("tablebody");
-// let tr = document.createElement("tr");
-// let th1 = document.createElement("th");
-// th1.value = `${doc.data().displayname}`;
-// let th2 = document.createElement("th");
-// th2.value = `${doc.data().time}`;
-// let th3 = document.createElement("th");
-// th3.value = `${doc.data().attempts}`;
-// tablebody.appendChild(tr);
-// tr.appendChild(th1);
-// tr.appendChild(th2);
-// tr.appendChild(th3);
-
-// var dataSet = new Array();
-//   dataSet.push([
-//     doc.data().displayname,
-//     doc.data().time,
-//     doc.data().attempts,
-//   ]);
-//   $(`#example`).DataTable({
-//     data: dataSet,
-//     columns: [
-//       { title: "Name" },
-//       { title: "Time Left" },
-//       { title: "Attempts" },
-//     ],
-//   });
-
-// });
-
-// {
-//   let db = firebase.firestore();
-//   var dataSet = new Array();
-//   var i = 1;
-
-//   db.collection("users")
-//     .where("displayname", "==", firebase.auth().currentUser.displayName)
-//     .get()
-//     .then(function (querySnapshot) {
-//       querySnapshot.forEach(function (doc) {
-// dataSet.push([
-//   doc.data().displayname,
-//   doc.data().time,
-//   doc.data().attempts,
-// ]);
-//         i = i + 1;
-//       });
-
-//       $("#example").DataTable({
-//         data: dataSet,
-//         columns: [
-//           { title: "Name" },
-//           { title: "Time Left" },
-//           { title: "Attempts" },
-//         ],
-//       });
-//     });
-// }
 
 startup();

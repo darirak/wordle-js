@@ -39,16 +39,19 @@ body {
   font-size: 2.4rem;
 }
 
-.box.empty {
-  background: var(--empty);
+.box.empty,
+.empty {
+  background: var(--empty) !important;
 }
 
-.box.wrong {
-  background: var(--wrong);
+.box.wrong,
+.wrong {
+  background: var(--wrong) !important;
 }
 
-.box.right {
-  background: var(--right);
+.box.right,
+.right {
+  background: var(--right) !important;
 }
 
 .animated {

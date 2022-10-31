@@ -1,9 +1,9 @@
+import { app } from "./firebase.js";
 import {
   getAuth,
   createUserWithEmailAndPassword,
   updateProfile,
 } from "https://www.gstatic.com/firebasejs/9.12.1/firebase-auth.js";
-import { app } from "../firebase.js";
 
 const nameField = document.getElementById("name");
 const mailField = document.getElementById("mail");
@@ -13,25 +13,25 @@ const backToLogin = document.getElementById("backToLogin");
 
 const auth = getAuth(app);
 
-const signUpFunction = () => {
+function signUpFunction() {
   const name = nameField.value;
   const email = mailField.value;
   const password = passwordField.value;
 
   createUserWithEmailAndPassword(auth, email, password)
-    .then(() => {
+    .then(function () {
       updateProfile(auth.currentUser, {
         displayName: name,
       })
-        .then(() => {
+        .then(function () {
           alert("Account Successfully Created !");
           window.location.assign("./");
         })
-        .catch((e) => {
+        .catch(function (e) {
           console.log(e);
         });
     })
-    .catch((e) => {
+    .catch(function (e) {
       //Error codes from Firebase Documentation
       if (e.code === "auth/email-already-in-use") {
         alert("email already in use!");
@@ -52,10 +52,10 @@ const signUpFunction = () => {
       }
       console.log(e);
     });
-};
+}
 
 signUp.addEventListener("click", signUpFunction);
 
-backToLogin.addEventListener("click", () => {
+backToLogin.addEventListener("click", function () {
   window.location.assign("./");
 });
