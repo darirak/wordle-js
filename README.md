@@ -1,7 +1,7 @@
 <h1 align="center">Wordle Clone with Vanilla JavaScript</h1>
 
   <p align="center">
-    <a href="wordle-js-angi.vercel.app"><strong>:point_right: Live Demo on Vercel :point_left:</strong></a>
+    <a href="https://wordle-js-angi.vercel.app"><strong>:point_right: Live Demo on Vercel :point_left:</strong></a>
     <br />
     <br />
   </p>
