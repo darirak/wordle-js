@@ -327,7 +327,7 @@ function startLogoutTimer() {
     time--;
   }
   // Set time to X seconds
-  let time = 90;
+  let time = 120;
   // Call the timer every second
   tick();
   const timer = setInterval(tick, 1000);
@@ -438,6 +438,9 @@ function noScroll() {
   document.body.style.overflow = "hidden";
   document.body.style.userSelect = "none";
 }
+
+// LOGOUT ON CLOSE TAB
+window.onunload = signOutAcc();
 
 function startup() {
   const game = document.getElementById("game");
