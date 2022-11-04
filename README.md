@@ -1,6 +1,16 @@
 <h1 align="center">Wordle</h1>
 
-### <a href="https://github.com/darirak/wordle-js/tree/Version-4">v4.1</a> - Firestore Database + Leaderboard Ranks
+### Version 5 - Responsive Design
+
+Features:
+- Responsive Design TEST
+- Login Account:
+  - Email = `aaaaaa@yahoo.com`
+  - Password = `aaaaaa`
+
+### Patch Notes:
+
+<a href="https://github.com/darirak/wordle-js/tree/Version-4">v4.1</a> - Firestore Database + Leaderboard Ranks
 
 Features:
 
@@ -11,20 +21,6 @@ Features:
 - Customized Alerts for Winning / Losing
 - Modal for Leaderboard
 - Functional Buttons
-- Login Account:
-  - Email = `aaaaaa@yahoo.com`
-  - Password = `aaaaaa`
-
-<div align="center">
-
-![WordleDatabase](https://github.com/darirak/wordle-js/blob/Version-4/assets/wordleDatabase.png?raw=true)
-
-![WordleIndex](https://github.com/darirak/wordle-js/blob/Version-4/assets/wordleIndex.png?raw=true)
-
-![WordlePreviewV4](https://github.com/darirak/wordle-js/blob/Version-4/assets/wordlepreviewv4.png?raw=true)
-</div>
-
-### Patch Notes:
 
 <a href="https://github.com/darirak/wordle-js/tree/Version-3">v3.1</a> - Firebase Authentication
 

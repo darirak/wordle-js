@@ -90,3 +90,23 @@ button {
   align-items: center;
   display: flex;
 }
+
+@media only screen and (max-width: 450px) {
+  input[type="text"],
+  input[type="password"],
+  input[type="email"] {
+    width: 325px;
+  }
+}
+
+@media only screen and (min-height: 640px) and (max-height: 720px) {
+  main {
+    height: 700px;
+  }
+}
+
+@media only screen and (max-height: 640px) {
+  main {
+    height: 600px;
+  }
+}

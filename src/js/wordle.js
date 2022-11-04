@@ -433,9 +433,16 @@ var leaderboard = async function getDatainTable() {
   }
 };
 
+// DISABLE SCROLL
+function noScroll() {
+  document.body.style.overflow = "hidden";
+  document.body.style.userSelect = "none";
+}
+
 function startup() {
   const game = document.getElementById("game");
   drawGrid(game);
+  noScroll();
   registerKeyboardEvents();
   initStatsModal();
   if (timer) clearInterval(timer);

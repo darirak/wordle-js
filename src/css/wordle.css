@@ -213,3 +213,80 @@ td {
   text-align: center;
   font-size: 20px;
 }
+
+@media only screen and (max-width: 500px) {
+  .title {
+    margin-top: -0.2rem;
+    font-size: 1.2rem;
+  }
+  img {
+    height: 23px;
+    width: 23px;
+  }
+  .logout-timer {
+    padding: 0 0.3rem;
+    margin-top: 1.2rem;
+    font-size: 1.2rem;
+  }
+  .header {
+    height: 40px;
+  }
+  .key-container button {
+    width: 29px;
+    height: 58px;
+    border-radius: 4px;
+    margin: 3px;
+  }
+  .key-container {
+    width: 350px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  #enter,
+  #bksp {
+    width: 45px;
+    font-size: 10px;
+    text-align: center;
+  }
+  #game {
+    margin-top: 0rem;
+    height: 60vh;
+  }
+  .game-container {
+    height: 72vh;
+  }
+  table,
+  th,
+  td {
+    width: 300px;
+    height: 30px;
+    text-align: center;
+    font-size: 16px;
+  }
+}
+
+@media only screen and (min-width: 501px) and (max-width: 600px) {
+  table,
+  th,
+  td {
+    width: 420px;
+    height: 42px;
+    font-size: 17px;
+  }
+}
+
+@media only screen and (max-height: 720px) {
+  .game-container {
+    height: 90vh;
+  }
+  .key-container button {
+    height: 50px;
+  }
+}
+
+@media only screen and (max-height: 850px) {
+  #game {
+    margin-top: 0rem;
+    height: 60vh;
+  }
+}
