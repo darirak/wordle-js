@@ -439,9 +439,6 @@ function noScroll() {
   document.body.style.userSelect = "none";
 }
 
-// LOGOUT ON CLOSE TAB
-window.onunload = signOutAcc();
-
 function startup() {
   const game = document.getElementById("game");
   drawGrid(game);
