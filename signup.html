@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Sign Up</title>
+    <link rel="icon" type="image/x-icon" href="./assets/icons/favicon.ico" />
+    <link rel="stylesheet" href="./src/css/signup.css" />
+  </head>
+  <body>
+    <main>
+      <section class="container signup-container">
+        <fieldset>
+          <div>
+            <img src="./assets/icons/signup.svg" />
+          </div>
+          <div>
+            <label for="displayname"></label> <br />
+            <input
+              type="name"
+              id="name"
+              name="name"
+              placeholder="Display Name"
+            />
+          </div>
+          <div>
+            <label for="mail"></label> <br />
+            <input type="email" id="mail" name="mail" placeholder="Email" />
+          </div>
+          <div>
+            <label for="password"></label> <br />
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Password"
+            />
+            <br />
+          </div>
+          <button id="signUp">SIGN UP</button>
+          <button id="backToLogin">Back to Login</button>
+        </fieldset>
+      </section>
+    </main>
+    <script type="module" src="./src/js/firebase.js"></script>
+    <script type="module" src="./src/js/signup.js"></script>
+  </body>
+</html>

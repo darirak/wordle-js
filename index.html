@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Login to Wordle</title>
+    <link rel="icon" type="image/x-icon" href="./assets/icons/favicon.ico" />
+    <link rel="stylesheet" href="./src/css/login.css" />
+  </head>
+  <body>
+    <main>
+      <div class="wrapper">
+        <section class="container mail-container">
+          <fieldset>
+            <div>
+              <img
+                src="./assets/icons/login.png"
+                width="250px"
+                height="125px"
+              />
+            </div>
+            <div>
+              <label for="mail"></label> <br />
+              <input type="email" id="mail" name="mail" placeholder="Email" />
+            </div>
+            <div>
+              <label for="password"></label> <br />
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Password"
+              />
+            </div>
+            <div class="clearfix"></div>
+            <button id="signInWithMail">LOGIN</button>
+            <button id="signUp">SIGN UP</button>
+          </fieldset>
+          <button id="signInWithGoogle" class="google">
+            <img
+              src="./assets/icons/google.svg"
+              width="30px"
+              height="30px"
+              style="margin: 1px 5px 1px -10px"
+              alt="Sign in with your Google account."
+            />
+            Google
+          </button>
+        </section>
+        <br />
+      </div>
+    </main>
+    <script type="module" src="./src/js/firebase.js"></script>
+    <script type="module" src="./src/js/login.js"></script>
+  </body>
+</html>

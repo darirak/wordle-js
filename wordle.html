@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta name="theme-color" content="#121213" />
+    <title>Wordle JS | Alexandru Angelescu</title>
+    <meta
+      name="description"
+      content="Wordle JS by Alexandru Angelescu aka darirak"
+    />
+    <link rel="icon" type="image/x-icon" href="./assets/icons/favicon.ico" />
+    <link rel="stylesheet" href="./src/css/wordle.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="menuleft">
+        <button class="icon" id="logout">
+          <img src="./assets/icons/logout.svg" alt="Logout" />
+        </button>
+        <!-- LOGOUT TIMER -->
+        <p class="logout-timer">
+          <span class="timer">90</span>
+        </p>
+        <!-- LOGOUT TIMER -->
+        <button class="icon">
+          <img src="./assets/icons/clock.svg" alt="Timer" />
+        </button>
+      </div>
+      <h1 class="title">Wordle</h1>
+      <div class="menuright">
+        <button class="icon" id="refresh" onClick="window.location.reload();">
+          <img src="./assets/icons/refresh.svg" alt="Restart" />
+        </button>
+        <button class="icon" id="rules">
+          <img src="./assets/icons/rules.svg" alt="Rules" />
+        </button>
+        <button class="icon" id="leaderboard">
+          <img src="./assets/icons/leaderboard.svg" alt="Settings" />
+        </button>
+      </div>
+    </header>
+    <hr />
+    <div class="game-container">
+      <div id="game"></div>
+      <div class="key-container"></div>
+    </div>
+    <div id="stats-modal" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close" id="close-stats">&times;</span>
+        <div class="modal-header">
+          <h2 class="modal-title" style="text-align: center">Leaderboard</h2>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Name</th>
+              <th>Time Left</th>
+              <th>Attempts</th>
+            </tr>
+          </thead>
+          <tbody id="tablebody" class="tablebody"></tbody>
+        </table>
+      </div>
+    </div>
+    <script defer src="./src/js/wordle.js" type="module"></script>
+  </body>
+</html>
