@@ -59,3 +59,11 @@ signUp.addEventListener("click", signUpFunction);
 backToLogin.addEventListener("click", function () {
   window.location.assign("./");
 });
+
+// DISABLE SCROLL
+function noScroll() {
+  document.body.style.overflow = "hidden";
+  document.body.style.userSelect = "none";
+}
+
+noScroll();

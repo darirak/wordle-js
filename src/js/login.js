@@ -85,3 +85,11 @@ signInWithMail.addEventListener("click", signInWithEmailFunction);
 signUp.addEventListener("click", function () {
   window.location.assign("./signup.html");
 });
+
+// DISABLE SCROLL
+function noScroll() {
+  document.body.style.overflow = "hidden";
+  document.body.style.userSelect = "none";
+}
+
+noScroll();
