@@ -1,7 +1,7 @@
 <h1 align="center">Wordle Clone with Vanilla JavaScript</h1>
 
   <p align="center">
-    <a href="https://darirak.github.io/SO-Proiect-Demo/"><strong>:point_right: Live Demo on Vercel :point_left:</strong></a>
+    <a href="https://wordle-js-angi.vercel.app"><strong>:point_right: Live Demo on Vercel :point_left:</strong></a>
     <br />
     <br />
   </p>
@@ -30,7 +30,7 @@
 
 
 
-<!-- ADD VIDEO -->
+https://user-images.githubusercontent.com/43470248/200020033-b181dd75-ff8a-4fd2-bbdc-f3bc84bdf1d2.mp4
 
 
 
