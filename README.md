@@ -67,7 +67,7 @@ https://user-images.githubusercontent.com/43470248/200020033-b181dd75-ff8a-4fd2-
     * Fully Functional Game - Give it a try :)
     * Firebase Authentication (Login/Signup Pages)
     * Firestore for Data Handling (Highscore Stats)
-    * Leaderboard (based on Firestore)
+    * Leaderboard Modal (based on Firestore)
     * Version Control (different branches for each major change)
     * Patch Notes with link to each branch (<a href="#patch-notes">down below</a>)
 
@@ -76,6 +76,7 @@ https://user-images.githubusercontent.com/43470248/200020033-b181dd75-ff8a-4fd2-
 * [![HTML][HTML.com]][HTML-url]
 * [![CSS][CSS3.com]][CSS-url]
 * [![JavaScript][JavaScript.com]][JavaScript-url]
+* [![Firebase][Firebase.com]][Firebase-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -85,6 +86,8 @@ https://user-images.githubusercontent.com/43470248/200020033-b181dd75-ff8a-4fd2-
 [CSS-url]: https://www.css3.com/
 [JavaScript.com]: https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black
 [JavaScript-url]: https://www.javascript.com/
+[Firebase.com]: https://img.shields.io/badge/Firebase-039BE5?style=for-the-badge&logo=Firebase&logoColor=white
+[Firebase-url]: https://firebase.google.com/
 
 ### Patch Notes:
 
@@ -92,7 +95,7 @@ https://user-images.githubusercontent.com/43470248/200020033-b181dd75-ff8a-4fd2-
 
 - [4.1] Changed Project Structure - CSS and JS in separate folders
 - Firestore Database - Player-Data Available in Firestore (Display Name, Attempts and Time Left)
-- Leaderboard - Displays #Top10 Best Players (Sorted via Composite Indexed Fields - Attempts ascending & Time descending)
+- Leaderboard Modal - Displays #Top10 Best Players (Sorted via Composite Indexed Fields - Attempts ascending & Time descending)
 - Functional SignUp + Page Changes - CSS & "Display Name" Field added
 - Customized Alerts for Winning / Losing
 - Modal for Leaderboard
