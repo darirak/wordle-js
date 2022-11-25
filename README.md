@@ -51,7 +51,7 @@ https://user-images.githubusercontent.com/43470248/200020033-b181dd75-ff8a-4fd2-
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<!-- FLOWCHART -->
+![Wordle-Flowchart](https://github.com/darirak/wordle-js/blob/main/assets/wordle-flowchart.png?raw=true)
 
 ### **Flowchart of the Project**
 * ![#dfc686](https://via.placeholder.com/15/dfc686/dfc686.png) Yellow - The possible actions a user can take
